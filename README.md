@@ -10,15 +10,19 @@ public class MyApp {
 
     public static void main(String[] args) {
         MyApp app = new MyApp();
-        app.run();
+        try {
+            app.run();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
     
-    public void run() {
+    public void run() throws Exception {
         Templ8Engine engine = new Templ8Engine(new File("templates"));
         BasicScope scope = new BasicScope();
         scope.addImport("MyApp", MyApp.class);
         scope.set("todos", new String[] { "Clean Room", "Prepare Food" });
-        System.out.println(engine.render("test"), scope);
+        System.out.println(engine.render("test", scope));
     }
     
 }
